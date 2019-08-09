@@ -49,7 +49,7 @@ print response
 response = site.action.resource_create(
      name='example-resource-url',
      package_id='prudhoe_bay_map_b',
-     url='https://uaf.edu'
+     url='https://example.com'
 )
 print response
 
@@ -57,6 +57,6 @@ print response
 response = site.action.resource_create(
     name='example-resource-file',
     package_id='prudhoe_bay_map_b',
-    upload=open('/Users/cstephenson/Downloads/UAFLogo_A_647.pdf', 'rb')
+    upload=open('/path/to/file', 'rb')
 )
 print response
