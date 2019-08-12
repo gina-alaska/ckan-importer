@@ -7,21 +7,6 @@ site = ckanapi.RemoteCKAN(
     apikey='...' # Found on CKAN user page.
 )
 
-voc_response = site.action.vocabulary_create(
-    name='status'
-)
-print voc_response
-
-# Read and create Status tags from status.json.
-with open('status.json') as status_file:
-    data = json.load(status_file)
-    for tag in data['status']:
-        response = site.action.tag_create(
-            name=tag,
-            vocabulary_id=voc_response['id']
-        )
-        print response
-
 # Create a new Organization.
 response = site.action.organization_create(
     name='example-organization',
@@ -34,10 +19,10 @@ response = site.action.package_create(
     title='Prudhoe Bay Map B',
     notes='Map B shapefile with all layers combined.',
     name='prudhoe_bay_map_b',
-    status='Complete',                  # Dropdown
-    archived_at='2019-08-06T05:39:42',  # Date
-    request_contact_info='true',        # Boolean
-    extras=[{                           # GeoJSON
+    status='Complete',
+    archived_at='2019-08-06',
+    iso_topic_category='001',
+    extras=[{
         'key': 'spatial',
         'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
     }],
