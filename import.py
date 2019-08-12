@@ -10,7 +10,11 @@ site = ckanapi.RemoteCKAN(
 # Create a new Organization.
 response = site.action.organization_create(
     name='example-organization',
-    title='Example Organization'
+    title='Example Organization',
+    extras=[{
+        'key': 'acronym',
+        'value': 'EXPL'
+    }]
 )
 print response
 
