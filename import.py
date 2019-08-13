@@ -9,11 +9,13 @@ site = ckanapi.RemoteCKAN(
 
 # Create a new Organization.
 response = site.action.organization_create(
-    name='example-organization',
-    title='Example Organization',
+    name='evergreen-state',
+    title='Evergreen State',
+    description='Description of Evergreen State.',
+    image_url='https://path/to/image',
     extras=[{
         'key': 'acronym',
-        'value': 'EXPL'
+        'value': 'EVERGREEN'
     }]
 )
 print response
@@ -23,29 +25,31 @@ response = site.action.package_create(
     title='Prudhoe Bay Map B',
     notes='Map B shapefile with all layers combined.',
     name='prudhoe_bay_map_b',
-    status='Complete',
-    archived_at='2019-08-06',
-    iso_topic_category='001',
+    maintainer='Example Maintainer',
+    maintainer_email='maintainer@example.com',
+    status='Complete',                  # Custom field with validator.
+    archived_at='2019-08-06',           # Custom field with validator.
+    iso_topic_category='001',           # Custom field with validator.
     extras=[{
-        'key': 'spatial',
+        'key': 'spatial',               # Picked up by ckanext-spatial.
         'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
     }],
-    owner_org='example-organization'
+    owner_org='evergreen-state'
 )
 print response
 
 # Attach a URL as a resource to an existing Dataset.
 response = site.action.resource_create(
-     name='example-resource-url',
      package_id='prudhoe_bay_map_b',
-     url='https://example.com'
+     name='Eskimo Walrus Commission',
+     url='https://kawerak.org/natural-resources/eskimo-walrus-commission'
 )
 print response
 
 # Upload a file resource to DataStore and attach it to an existing Dataset.
 response = site.action.resource_create(
-    name='example-resource-file',
     package_id='prudhoe_bay_map_b',
-    upload=open('/path/to/file', 'rb')
+    upload=open('/path/to/file', 'rb'),
+    name='imported_locations'
 )
 print response
