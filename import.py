@@ -3,7 +3,7 @@ import ckanapi
 
 site = ckanapi.RemoteCKAN(
     'http://ckan.url',
-    apikey='...' # Found on CKAN user page.
+    apikey='...'  # Found on CKAN user page.
 )
 
 # Create a new Organization.
