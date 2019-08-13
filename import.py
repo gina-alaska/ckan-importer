@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import ckanapi
-import json
 
 site = ckanapi.RemoteCKAN(
     'http://ckan.url',
