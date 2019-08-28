@@ -18,13 +18,13 @@ def create_organization(site, orgname):
 # Create a new Dataset.
 def create_dataset(site, record):
     response = site.action.package_create(
-        title=record.title,
-        notes=record.description,
-        name=record.slug,
+        title=record['title'],
+        notes=record['description'],
+        name=record['slug'],
         # maintainer='Example Maintainer',
         # maintainer_email='maintainer@example.com',
-        status=record.status,               # Custom field with validator.
-        archived_at=record.archived_at,     # Custom field with validator.
+        status=record['status'],              # Custom field with validator.
+        archived_at=record['archived_at'],    # Custom field with validator.
         # iso_topic_category='001',           # Custom field with validator.
         # extras=[{
         #     'key': 'spatial',               # Picked up by ckanext-spatial.
