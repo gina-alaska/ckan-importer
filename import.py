@@ -2,7 +2,7 @@
 import ckanapi
 import argparse
 import json
-import import_functions
+import import_functions as imp
 
 parser = argparse.ArgumentParser(description='Import Glynx data into CKAN.')
 parser.add_argument('--file', help='JSON source file of Glynx data')
@@ -23,11 +23,11 @@ site = ckanapi.RemoteCKAN(
     apikey=args.apikey
 )
 
-#exit()
-
 # Create organization if needed
 if args.org:
-    create_organization(args.org)
+    imp.create_organization(args.org)
 
 # Parse JSON data and create datasets in CKAN
-# for record in glynxdata:
+for record in glynxdata:
+    imp.create_dataset(record)
+
