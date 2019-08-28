@@ -18,8 +18,8 @@ def create_organization(site, orgname):
 # Create a new Dataset.
 def create_dataset(site, record, org):
 
-	  if not record['slug']:
-	  	  record['slug'] = 'Not Set'
+    if not record['slug']:
+        record['slug'] = 'Not Set'
 
     response = site.action.package_create(
         title=record['title'],
