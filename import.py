@@ -29,5 +29,4 @@ if args.org:
     create_organization(args.org)
 
 # Parse JSON data and create datasets in CKAN
-for record in glynxdata:
-
+# for record in glynxdata:
