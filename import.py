@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# import ckanapi
+import ckanapi
 import argparse
 import json
 import import_functions
@@ -17,15 +17,17 @@ with open(args.file, "r") as read_file:
 
 print type(glynxdata[1])
 
-exit()
+#exit()
 
-site = ckanapi.RemoteCKAN(
-    'http://ckan.url',
-    apikey=args.apikey
-)
+#site = ckanapi.RemoteCKAN(
+#    'http://ckan.url',
+#    apikey=args.apikey
+#)
 
 # Create organization if needed
 if args.org:
     create_organization(args.org)
 
 # Parse JSON data and create datasets in CKAN
+for record in glynxdata:
+
