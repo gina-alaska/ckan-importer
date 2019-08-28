@@ -6,7 +6,7 @@ def create_organization(site, orgname):
     response = site.action.organization_create(
         name=orgname,
         title='Change Me',
-        description='Change Me',
+        description='please change this',
         #image_url='https://path/to/image',
         #extras=[{
         #    'key': 'acronym',
