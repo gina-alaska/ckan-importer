@@ -6,6 +6,7 @@ import import_functions
 
 parser = argparse.ArgumentParser(description='Import Glynx data into CKAN.')
 parser.add_argument('--file', help='JSON source file of Glynx data')
+parser.add_argument('--url', help='URL to the CKAN site')
 parser.add_argument('--apikey', help='API key found on the CKAN user page')
 parser.add_argument('--org', help='Create organization with name')
 
@@ -17,12 +18,12 @@ with open(args.file, "r") as read_file:
 
 print type(glynxdata[1])
 
-#exit()
+site = ckanapi.RemoteCKAN(
+    args.url,
+    apikey=args.apikey
+)
 
-#site = ckanapi.RemoteCKAN(
-#    'http://ckan.url',
-#    apikey=args.apikey
-#)
+#exit()
 
 # Create organization if needed
 if args.org:
