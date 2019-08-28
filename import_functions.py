@@ -1,7 +1,7 @@
 # Functions for CKAN importer for Glynx JSON data
 # import ckanapi
 
-def create_organization(orgname):
+def create_organization(site, orgname):
     # Create a new Organization.
     response = site.action.organization_create(
         name=orgname,
@@ -16,21 +16,21 @@ def create_organization(orgname):
     print response
 
 # Create a new Dataset.
-def create_dataset(data):
+def create_dataset(site, record):
     response = site.action.package_create(
-        title='Prudhoe Bay Map B',
-        notes='Map B shapefile with all layers combined.',
-        name='prudhoe_bay_map_b',
-        maintainer='Example Maintainer',
-        maintainer_email='maintainer@example.com',
-        status='Complete',                  # Custom field with validator.
-        archived_at='2019-08-06',           # Custom field with validator.
-        iso_topic_category='001',           # Custom field with validator.
-        extras=[{
-            'key': 'spatial',               # Picked up by ckanext-spatial.
-            'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
-        }],
-        owner_org='evergreen-state'
+        title=record.title,
+        notes=record.description,
+        name=record.slug,
+        # maintainer='Example Maintainer',
+        # maintainer_email='maintainer@example.com',
+        status=record.status,               # Custom field with validator.
+        archived_at=record.archived_at,     # Custom field with validator.
+        # iso_topic_category='001',           # Custom field with validator.
+        # extras=[{
+        #     'key': 'spatial',               # Picked up by ckanext-spatial.
+        #     'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
+        # }],
+        # owner_org='evergreen-state'
     )
     print response
 
