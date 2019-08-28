@@ -29,5 +29,5 @@ if args.org:
 
 # Parse JSON data and create datasets in CKAN
 for record in glynxdata:
-    imp.create_dataset(site, record)
+    imp.create_dataset(site, record, args.org)
 

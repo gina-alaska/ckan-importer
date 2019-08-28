@@ -1,5 +1,5 @@
 # Functions for CKAN importer for Glynx JSON data
-# import ckanapi
+import datetime
 
 def create_organization(site, orgname):
     # Create a new Organization.
@@ -16,21 +16,26 @@ def create_organization(site, orgname):
     print response
 
 # Create a new Dataset.
-def create_dataset(site, record):
+def create_dataset(site, record, org):
+
+	  if not record['slug']:
+	  	  record['slug'] = 'Not Set'
+
     response = site.action.package_create(
         title=record['title'],
         notes=record['description'],
         name=record['slug'],
         # maintainer='Example Maintainer',
         # maintainer_email='maintainer@example.com',
-        status=record['status'],              # Custom field with validator.
-        # archived_at=record['archived_at'],    # Custom field with validator.
-        # iso_topic_category='001',           # Custom field with validator.
-        # extras=[{
-        #     'key': 'spatial',               # Picked up by ckanext-spatial.
-        #     'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
-        # }],
-        # owner_org='evergreen-state'
+        status=record['status'],                  # Custom field with validator.
+        # archived_at=record['archived_at'],      # Custom field with validator.
+        archived_at=datetime.datetime.now(),      # Custom field with validator.
+        iso_topic_category='001',                 # Custom field with validator.
+        extras=[{
+            'key': 'spatial',               # Picked up by ckanext-spatial.
+            'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
+        }],
+        owner_org=org
     )
     print response
 
