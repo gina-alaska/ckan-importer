@@ -1,5 +1,6 @@
 # Functions for CKAN importer for Glynx JSON data
 import datetime
+import re
 
 def create_organization(site, orgname):
     # Create a new Organization.
@@ -19,7 +20,9 @@ def create_organization(site, orgname):
 def create_dataset(site, record, org):
 
     if record['slug'] == None:
-        record['slug'] = 'slug-' + record['title'].lower().replace(" ", "_")
+        newslug = record['title'].lower().replace(" ", "_")
+        newslug = re.sub('[^a-zA-Z0-9 \n\.]', '', newslug)
+        record['slug'] = newslug
 
     if record['status'] == None:
         record['status'] = "Unknown"
