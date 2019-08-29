@@ -19,14 +19,19 @@ def create_organization(site, orgname):
 # Create a new Dataset.
 def create_dataset(site, record, org):
 
-    if record['slug'] == None:
+    # Make sure that the slug will pass CKAN validation
+    slug = record['slug']
+    if slug == None:
         newslug = record['title'].lower().replace(" ", "_")
-        newslug = re.sub('[^a-zA-Z0-9 \n\.]', '', newslug)
-        record['slug'] = newslug
 
+    newslug = re.sub('[^a-zA-Z0-9 \-_\n\.]', '', slug)
+    record['slug'] = newslug
+
+    # Make sure that the status is set to something
     if record['status'] == None:
         record['status'] = "Unknown"
 
+    # Create the dataset
     response = site.action.package_create(
         title=record['title'],
         notes=record['description'],
