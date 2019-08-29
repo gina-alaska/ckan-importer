@@ -7,7 +7,6 @@ def create_organization(site, orgname):
         name=orgname,
         title=orgname,
         description='please change this',
-        return_id_only=true,
         #image_url='https://path/to/image',
         #extras=[{
         #    'key': 'acronym',
@@ -37,7 +36,7 @@ def create_dataset(site, record, org):
             'key': 'spatial',               # Picked up by ckanext-spatial.
             'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
         }],
-        owner_org=org
+        owner_org=str(org)
     )
     print response
 
