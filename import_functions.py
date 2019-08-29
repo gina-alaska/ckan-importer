@@ -22,7 +22,7 @@ def create_dataset(site, record, org):
     # Make sure that the slug will pass CKAN validation
     slug = record['slug']
     if slug == None:
-        newslug = record['title'].lower().replace(" ", "_")
+        slug = record['title'].lower().replace(" ", "_")
 
     newslug = re.sub('[^a-zA-Z0-9 \-_\n\.]', '', slug)
     record['slug'] = newslug
