@@ -18,8 +18,12 @@ def create_organization(site, orgname):
 # Create a new Dataset.
 def create_dataset(site, record, org):
 
-    if not record['slug']:
-        record['slug'] = 'slug-' + record[title].lower()
+    print record['slug']
+
+    if record['slug'] == None:
+        record['slug'] = 'slug-' + record['title'].lower().replace(" ", "_")
+
+    print record['slug']
 
     response = site.action.package_create(
         title=record['title'],
