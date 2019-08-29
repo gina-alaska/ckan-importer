@@ -18,9 +18,8 @@ def create_organization(site, orgname):
 # Create a new Dataset.
 def create_dataset(site, record, org):
 
-    print org
     if not record['slug']:
-        record['slug'] = 'Not Set'
+        record['slug'] = 'slug-' + record[title].lower()
 
     response = site.action.package_create(
         title=record['title'],
@@ -36,7 +35,7 @@ def create_dataset(site, record, org):
             'key': 'spatial',               # Picked up by ckanext-spatial.
             'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
         }],
-        owner_org=str(org)
+        owner_org=org
     )
     print response
 
