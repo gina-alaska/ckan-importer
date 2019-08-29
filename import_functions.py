@@ -5,19 +5,21 @@ def create_organization(site, orgname):
     # Create a new Organization.
     response = site.action.organization_create(
         name=orgname,
-        title='Change Me',
+        title=orgname,
         description='please change this',
+        return_id_only=true,
         #image_url='https://path/to/image',
         #extras=[{
         #    'key': 'acronym',
         #    'value': 'EVERGREEN'
         #}]
     )
-    print response
+    return response
 
 # Create a new Dataset.
 def create_dataset(site, record, org):
 
+    print org
     if not record['slug']:
         record['slug'] = 'Not Set'
 
@@ -29,7 +31,7 @@ def create_dataset(site, record, org):
         # maintainer_email='maintainer@example.com',
         status=record['status'],                  # Custom field with validator.
         # archived_at=record['archived_at'],      # Custom field with validator.
-        archived_at=datetime.datetime.now(),      # Custom field with validator.
+        archived_at=str(datetime.datetime.now()), # Custom field with validator.
         iso_topic_category='001',                 # Custom field with validator.
         extras=[{
             'key': 'spatial',               # Picked up by ckanext-spatial.

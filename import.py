@@ -24,10 +24,11 @@ site = ckanapi.RemoteCKAN(
 )
 
 # Create organization if needed
+org_id = ""
 if args.org:
-    imp.create_organization(site, args.org)
+    org_id = imp.create_organization(site, args.org)
 
 # Parse JSON data and create datasets in CKAN
 for record in glynxdata:
-    imp.create_dataset(site, record, args.org)
+    imp.create_dataset(site, record, org_id)
 
