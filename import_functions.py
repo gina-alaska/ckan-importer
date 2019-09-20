@@ -78,5 +78,5 @@ def delete_all_datasets(site):
 
     groups = site.action.group_list()
     for group in groups:
-        site.action.group_delete(id=group)
+        site.action.group_purge(id=group)
 
