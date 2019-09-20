@@ -68,3 +68,10 @@ def attach_file(data):
     )
     print response
 
+# This function deletes all of the datasets in the database so that the import can be ran
+# without any conflicts with existing datasets.
+def delete_all_datasets(site):
+    datasets = site.logic.action.get.package_list()
+    for dataset in datasets:
+        site.logic.action.delete.dataset_purge(id=dataset)
+
