@@ -25,6 +25,7 @@ def create_dataset(site, record, org):
         slug = record['title'].lower().replace(" ", "_")
 
     newslug = re.sub('[^a-zA-Z0-9 \-_\n\.]', '', slug)
+    newslug.replace(".", "")
     record['slug'] = newslug
     print("**** " + newslug)
 
