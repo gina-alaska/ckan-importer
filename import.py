@@ -21,10 +21,10 @@ site = ckanapi.RemoteCKAN(
 
 # Delete datasets
 if args.delete:
-    print( 'Deleting all datasets!!')
-    choice = input('Are you sure? (Y/n)')
+    print( 'Deleting all datasets!!' )
+    choice = raw_input("Are you sure? (Y/n) ")
     if choice != 'Y':
-        print( 'Cancelled!')
+        print( 'Cancelled!' )
         exit()
 
     imp.delete_all_datasets(site)
