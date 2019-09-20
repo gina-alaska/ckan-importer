@@ -19,7 +19,7 @@ site = ckanapi.RemoteCKAN(
     apikey=args.apikey
 )
 
-# Delete datasets
+# Delete datasets if option is set
 if args.delete:
     print( 'Deleting all datasets!!' )
     choice = raw_input("Are you sure? (Y/n) ")
@@ -28,6 +28,8 @@ if args.delete:
         exit()
 
     imp.delete_all_datasets(site)
+    print('All datasets have been deleted.')
+    exit()
 
 # Load Glynx JSON file
 with open(args.file, "r") as read_file:
