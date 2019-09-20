@@ -69,10 +69,14 @@ def attach_file(data):
     )
     print response
 
-# This function deletes all of the datasets in the database so that the import can be ran
+# This function deletes all of the datasets and groups in the database so that the import can be ran
 # without any conflicts with existing datasets.
 def delete_all_datasets(site):
     datasets = site.action.package_list()
     for dataset in datasets:
         site.action.dataset_purge(id=dataset)
+
+    groups = site.action.group_list()
+    for group in groups:
+        site.action.group_delete(id=group)
 
