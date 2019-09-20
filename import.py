@@ -9,7 +9,7 @@ parser.add_argument('--url', help='URL to the CKAN site')
 parser.add_argument('--apikey', help='API key found on the CKAN user page')
 parser.add_argument('--org', help='Create organization with name')
 parser.add_argument('--file', help='JSON source file of Glynx data')
-parser.add_argument('-delete', help='Delete all datasets in the database', default='n')
+parser.add_argument('-delete', help='Delete all datasets in the database', default=None)
 
 args = parser.parse_args()
 
@@ -20,7 +20,7 @@ site = ckanapi.RemoteCKAN(
 )
 
 # Delete datasets if option is set
-if args.delete == 'Y':
+if args.delete:
     print( 'Deleting all datasets!!' )
     choice = raw_input("Are you sure? (Y/n) ")
     if choice != 'Y':

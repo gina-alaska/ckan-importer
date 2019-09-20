@@ -26,6 +26,7 @@ def create_dataset(site, record, org):
 
     newslug = re.sub('[^a-zA-Z0-9 \-_\n\.]', '', slug)
     record['slug'] = newslug
+    print("**** " + newslug)
 
     # Make sure that the status is set to something
     if record['status'] == None:
