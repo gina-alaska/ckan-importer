@@ -10,6 +10,7 @@ parser.add_argument('--apikey', help='API key found on the CKAN user page')
 parser.add_argument('--org', help='Create organization with name')
 parser.add_argument('--file', help='JSON source file of Glynx data')
 parser.add_argument('-delete', help='Delete all datasets in the database', action='store_true', default=False)
+parser.add_argument('-report', help='Report and skip all records with a title longer than 100 chars.', action='store_true', default=False)
 
 args = parser.parse_args()
 
@@ -43,5 +44,11 @@ if args.org:
 
 # Parse JSON data and create datasets in CKAN
 for record in glynxdata:
+    if args.report and len(record.title) > 100:
+        print("Record tile is too long:")
+        print(record.title)
+        print()
+        continue
+
     imp.create_dataset(site, record, args.org)
 

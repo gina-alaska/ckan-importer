@@ -80,4 +80,3 @@ def delete_all_datasets(site):
     orgs = site.action.organization_list()
     for org in orgs:
         site.action.organization_purge(id=org)
-
