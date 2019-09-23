@@ -50,7 +50,7 @@ if args.org:
 for record in glynxdata:
     if args.report and len(record["title"]) > 100:
         report_file.write("Record tile is too long:\n")
-        report_file.write(record["title"] + "\n")
+        report_file.write(record["title"].encode('utf-8') + "\n")
         report_file.write("\n")
         continue
 
