@@ -32,6 +32,10 @@ if args.delete:
     print('All datasets have been deleted.')
     exit()
 
+# Open report file
+if args.report:
+    report_file = open(args.file + ".report", "w")
+
 # Load Glynx JSON file
 with open(args.file, "r") as read_file:
     glynxdata = json.load(read_file)
@@ -45,10 +49,13 @@ if args.org:
 # Parse JSON data and create datasets in CKAN
 for record in glynxdata:
     if args.report and len(record["title"]) > 100:
-        print("Record tile is too long:")
-        print(record["title"])
-        print()
+        report.write("Record tile is too long:\n")
+        report.write(record["title"] + "\n")
+        report.write("\n")
         continue
 
     imp.create_dataset(site, record, args.org)
 
+# Close report file
+if args.report:
+    report_file.close()
