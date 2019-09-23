@@ -49,9 +49,9 @@ if args.org:
 # Parse JSON data and create datasets in CKAN
 for record in glynxdata:
     if args.report and len(record["title"]) > 100:
-        report.write("Record tile is too long:\n")
-        report.write(record["title"] + "\n")
-        report.write("\n")
+        report_file.write("Record tile is too long:\n")
+        report_file.write(record["title"] + "\n")
+        report_file.write("\n")
         continue
 
     imp.create_dataset(site, record, args.org)
