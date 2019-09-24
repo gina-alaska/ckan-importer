@@ -50,6 +50,7 @@ def create_dataset(site, record, org):
         }],
         owner_org=org
     )
+    print response
 
     # Process record links
     print("######")
@@ -59,14 +60,13 @@ def create_dataset(site, record, org):
             continue
         attach_url(record['slug'], site, link)
 
-    print response
-
 # Attach a URL as a resource to an existing Dataset.
 def attach_url(package_title, site, link):
     response = site.action.resource_create(
          package_id=package_title,
          name=link["category"] + " - " + link["display_text"],
-         url=link["url"]
+         url=link["url"],
+         archived_at=str(datetime.datetime.now().isoformat()) # Custom field with validator.
     )
     print response
 
