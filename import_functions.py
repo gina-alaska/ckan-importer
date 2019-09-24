@@ -57,6 +57,8 @@ def create_dataset(site, record, org):
     for link in record["links"]:
         print("------")
         print(link)
+        if link == {}:
+            continue
         attach_url(record['title'], site, link)
 
     print response
