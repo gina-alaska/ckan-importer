@@ -59,6 +59,7 @@ def create_dataset(site, record, org):
 
 # Attach a URL as a resource to an existing Dataset.
 def attach_url(package_title, site, link):
+    print(link)
     response = site.action.resource_create(
          package_id=package_title,
          name=link["display_text"],
