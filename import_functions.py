@@ -50,14 +50,19 @@ def create_dataset(site, record, org):
         }],
         owner_org=org
     )
+
+    # Process record links
+    for link in record["links"]:
+        attach_url(record['title'], site, link)
+
     print response
 
 # Attach a URL as a resource to an existing Dataset.
-def attach_url(data):
+def attach_url(package_title, site, link):
     response = site.action.resource_create(
-         package_id='prudhoe_bay_map_b',
-         name='Eskimo Walrus Commission',
-         url='https://kawerak.org/natural-resources/eskimo-walrus-commission'
+         package_id=package_title,
+         name=link["display_text"],
+         url=link["url"]
     )
     print response
 
