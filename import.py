@@ -3,6 +3,7 @@ import ckanapi
 import argparse
 import json
 import import_functions as imp
+import datetime
 
 parser = argparse.ArgumentParser(description='Import Glynx data into CKAN.')
 parser.add_argument('--url', help='URL to the CKAN site')
