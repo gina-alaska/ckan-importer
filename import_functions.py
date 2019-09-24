@@ -52,9 +52,11 @@ def create_dataset(site, record, org):
     )
 
     # Process record links
-    print("######" + record["links"])
+    print("######")
+    print(record["links"])
     for link in record["links"]:
-        print("------" + link)
+        print("------")
+        print(link)
         attach_url(record['title'], site, link)
 
     print response
