@@ -52,14 +52,15 @@ def create_dataset(site, record, org):
     )
 
     # Process record links
+    print("######" + record["links"])
     for link in record["links"]:
+        print("------" + link)
         attach_url(record['title'], site, link)
 
     print response
 
 # Attach a URL as a resource to an existing Dataset.
 def attach_url(package_title, site, link):
-    print(link)
     response = site.action.resource_create(
          package_id=package_title,
          name=link["display_text"],
