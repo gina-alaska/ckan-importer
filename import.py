@@ -46,6 +46,9 @@ print type(glynxdata[1])
 if args.org:
     imp.create_organization(site, args.org)
 
+# temp archive data
+archive=str(datetime.datetime.now().isoformat())
+
 # Parse JSON data and create datasets in CKAN
 for record in glynxdata:
     if args.report and len(record["title"]) > 100:
@@ -54,7 +57,7 @@ for record in glynxdata:
         report_file.write("\n")
         continue
 
-    imp.create_dataset(site, record, args.org)
+    imp.create_dataset(site, record, args.org, archive)
 
 # Close report file
 if args.report:

@@ -17,7 +17,7 @@ def create_organization(site, orgname):
     return response
 
 # Create a new Dataset.
-def create_dataset(site, record, org):
+def create_dataset(site, record, org, archive):
 
     # Make sure that the slug will pass CKAN validation
     slug = record['slug']
@@ -42,7 +42,8 @@ def create_dataset(site, record, org):
         # maintainer_email='maintainer@example.com',
         status=record['status'],                  # Custom field with validator.
         # archived_at=record['archived_at'],      # Custom field with validator.
-        archived_at=str(datetime.datetime.now().isoformat()), # Custom field with validator.
+        archived_at=archive,
+        # archived_at=str(datetime.datetime.now().isoformat()), # Custom field with validator.
         iso_topic_category='001',                 # Custom field with validator.
         extras=[{
             'key': 'spatial',               # Picked up by ckanext-spatial.
@@ -58,15 +59,16 @@ def create_dataset(site, record, org):
     for link in record["links"]:
         if link == {}:
             continue
-        attach_url(record['slug'], site, link)
+        attach_url(record['slug'], site, link, archive)
 
 # Attach a URL as a resource to an existing Dataset.
-def attach_url(package_title, site, link):
+def attach_url(package_title, site, link, archive):
     response = site.action.resource_create(
          package_id=package_title,
          name=link["category"] + " - " + link["display_text"],
          url=link["url"],
-         archived_at=str(datetime.datetime.now().isoformat()) # Custom field with validator.
+         archived_at=archive
+         # archived_at=str(datetime.datetime.now().isoformat()) # Custom field with validator.
     )
     print response
 
