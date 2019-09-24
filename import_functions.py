@@ -55,11 +55,9 @@ def create_dataset(site, record, org):
     print("######")
     print(record["links"])
     for link in record["links"]:
-        print("------")
-        print(type(link))
         if link == {}:
             continue
-        attach_url(record['title'], site, link)
+        attach_url(record['slug'], site, link)
 
     print response
 
@@ -67,7 +65,7 @@ def create_dataset(site, record, org):
 def attach_url(package_title, site, link):
     response = site.action.resource_create(
          package_id=package_title,
-         name=link["display_text"],
+         name=link["category"] + " - " + link["display_text"],
          url=link["url"]
     )
     print response
