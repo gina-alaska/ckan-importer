@@ -56,7 +56,7 @@ def create_dataset(site, record, org):
     print(record["links"])
     for link in record["links"]:
         print("------")
-        print(link)
+        print(type(link))
         if link == {}:
             continue
         attach_url(record['title'], site, link)
