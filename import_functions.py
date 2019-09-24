@@ -42,7 +42,7 @@ def create_dataset(site, record, org):
         # maintainer_email='maintainer@example.com',
         status=record['status'],                  # Custom field with validator.
         # archived_at=record['archived_at'],      # Custom field with validator.
-        archived_at=str(datetime.datetime.now()), # Custom field with validator.
+        archived_at=str(datetime.datetime.now().isoformat()), # Custom field with validator.
         iso_topic_category='001',                 # Custom field with validator.
         extras=[{
             'key': 'spatial',               # Picked up by ckanext-spatial.
