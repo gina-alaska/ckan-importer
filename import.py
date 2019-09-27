@@ -43,7 +43,7 @@ if args.delete:
 
 # Open report file
 if args.report:
-    report_file = open(args.file + ".report", "w")
+    report_file = open("export_report.txt", "w")
 
 # Load Glynx JSON file
 for file in os.listdir("export"):
