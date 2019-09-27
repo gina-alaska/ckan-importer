@@ -48,7 +48,7 @@ if args.report:
 # Load Glynx JSON file
 for file in os.listdir("export"):
     if file.endswith(".json"):
-        with open(file, "r") as read_file:
+        with open("export/" + file, "r") as read_file:
             glynxdata = json.load(read_file)
 
 # Create organization if needed
