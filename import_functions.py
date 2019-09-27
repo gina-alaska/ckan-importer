@@ -27,7 +27,7 @@ def create_dataset(site, record, org, archive):
     newslug = re.sub('[^a-zA-Z0-9 \-_\n\.]', '', slug)
     newslug = newslug.replace(".", "")
     record['slug'] = newslug[:100]
-    print("**** " + newslug)
+    print("**** importing " + newslug)
 
     # Make sure that the status is set to something
     if record['status'] == None:
@@ -54,12 +54,18 @@ def create_dataset(site, record, org, archive):
     print response
 
     # Process record links
-    print("######")
-    print(record["links"])
+    print("###### importing links")
     for link in record["links"]:
         if link == {}:
             continue
         attach_url(record['slug'], site, link, archive)
+
+    # Process attachments
+    print("###### importing attachments")
+    for attachment in record["attachments"]:
+        if attachment == {}:
+            continue
+        attach_file(record['slug'], site, attachment, archive)
 
 # Attach a URL as a resource to an existing Dataset.
 def attach_url(package_title, site, link, archive):
@@ -70,16 +76,15 @@ def attach_url(package_title, site, link, archive):
          archived_at=archive
          # archived_at=str(datetime.datetime.now().isoformat()) # Custom field with validator.
     )
-    print response
 
 # Upload a file resource to DataStore and attach it to an existing Dataset.
-def attach_file(data):
+def attach_file(package_title, site, file, archive):
     response = site.action.resource_create(
-        package_id='prudhoe_bay_map_b',
-        upload=open('/path/to/file', 'rb'),
-        name='imported_locations'
+        package_id=package_title,
+        upload=open('export/files/' + file.file_name, 'rb'),
+        name=file.file_name,
+        archived_at=archive
     )
-    print response
 
 # This function deletes all of the datasets and organizations in the database so that the import can
 # be ran without any conflicts with existing datasets.

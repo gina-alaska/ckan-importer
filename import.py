@@ -1,15 +1,23 @@
 #!/usr/bin/env python
+#
+# This script expects to have an "export" directory from which to load the Glynx data from.
+# This directory should have a .json file of the GLynx data and a "files" directory with the 
+# exported Glynx files. All of these should be automatically created by the Glynx export 
+# rake task.
+#
+
 import ckanapi
 import argparse
 import json
 import import_functions as imp
 import datetime
+import os
 
 parser = argparse.ArgumentParser(description='Import Glynx data into CKAN.')
 parser.add_argument('--url', help='URL to the CKAN site')
 parser.add_argument('--apikey', help='API key found on the CKAN user page')
 parser.add_argument('--org', help='Create organization with name')
-parser.add_argument('--file', help='JSON source file of Glynx data')
+# parser.add_argument('--file', help='JSON source file of Glynx data')
 parser.add_argument('-delete', help='Delete all datasets in the database', action='store_true', default=False)
 parser.add_argument('-report', help='Report and skip all records with a title longer than 100 chars.', action='store_true', default=False)
 
@@ -38,10 +46,10 @@ if args.report:
     report_file = open(args.file + ".report", "w")
 
 # Load Glynx JSON file
-with open(args.file, "r") as read_file:
-    glynxdata = json.load(read_file)
-
-print type(glynxdata[1])
+for file in os.listdir("export"):
+    if file.endswith(".json"):
+        with open(file, "r") as read_file:
+            glynxdata = json.load(read_file)
 
 # Create organization if needed
 if args.org:
