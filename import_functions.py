@@ -81,8 +81,8 @@ def attach_url(package_title, site, link, archive):
 def attach_file(package_title, site, file, archive):
     response = site.action.resource_create(
         package_id=package_title,
-        upload=open('export/files/' + file.file_name, 'rb'),
-        name=file.file_name,
+        upload=open('export/files/' + file["file_name"], 'rb'),
+        name=file["file_name"],
         archived_at=archive
     )
 
