@@ -41,6 +41,11 @@ if args.delete:
     print('All datasets have been deleted.')
     exit()
 
+# Check for export directory
+if not os.path.exists("export")
+    print("I can't find the export directory!")
+    exit()
+    
 # Open report file
 if args.report:
     report_file = open("export_report.txt", "w")
