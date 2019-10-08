@@ -47,7 +47,7 @@ def create_dataset(site, record, org, archive):
         iso_topic_category='001',                 # Custom field with validator.
         extras=[{
             'key': 'spatial',               # Picked up by ckanext-spatial.
-            'value': '{"type": "Polygon", "coordinates": [[[-162.0703125, 69.47296854140573], [-148.88671875, 69.47296854140573], [-148.88671875, 72.3424643905499], [-162.0703125, 72.3424643905499], [-162.0703125, 69.47296854140573]]]}'
+            'value': record['geom']
         }],
         owner_org=org
     )
