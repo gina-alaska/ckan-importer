@@ -42,7 +42,7 @@ if args.delete:
     exit()
 
 # Check for export directory
-if not os.path.exists("export")
+if not os.path.exists("export"):
     print("I can't find the export directory!")
     exit()
     
