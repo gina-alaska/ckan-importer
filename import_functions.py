@@ -33,6 +33,10 @@ def create_dataset(site, record, org, archive):
     if record['status'] == None:
         record['status'] = "Unknown"
 
+    # Process bounds
+    bounds_array = record["bounds"].split("geom:", 1)
+    bounds_value = bounds_array[1][3:-3]
+    
     # Create the dataset
     response = site.action.package_create(
         title=record['title'],
@@ -47,7 +51,7 @@ def create_dataset(site, record, org, archive):
         iso_topic_category='001',                 # Custom field with validator.
         extras=[{
             'key': 'spatial',               # Picked up by ckanext-spatial.
-            'value': record['geom']
+            'value': bounds_value
         }],
         owner_org=org
     )
