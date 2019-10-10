@@ -33,13 +33,14 @@ def create_dataset(site, record, org, archive):
     if record['status'] == None:
         record['status'] = "Unknown"
 
-    # Set bounds
+    # Set bounds if available
     if record['bounds']:
         bounds_value = record['bounds'][0]['geom']
     else:
         bounds_value  = ""
 
     # Create the dataset
+    print("###### importing metadata")
     response = site.action.package_create(
         title=record['title'],
         notes=record['description'],
@@ -57,7 +58,6 @@ def create_dataset(site, record, org, archive):
         }],
         owner_org=org
     )
-    print response
 
     # Process record links
     print("###### importing links")
