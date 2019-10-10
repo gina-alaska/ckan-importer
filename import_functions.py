@@ -33,10 +33,12 @@ def create_dataset(site, record, org, archive):
     if record['status'] == None:
         record['status'] = "Unknown"
 
-    # Process bounds
-    bounds_array = record["bounds"].split("geom:", 1)
-    bounds_value = bounds_array[1][3:-3]
-    
+    # Set bounds
+    if record['bounds']:
+        bounds_value = record['bounds'][0]['geom']
+    else:
+        bounds_value  = ""
+
     # Create the dataset
     response = site.action.package_create(
         title=record['title'],
