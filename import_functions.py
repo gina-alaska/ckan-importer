@@ -92,6 +92,9 @@ def attach_file(package_title, site, file, archive):
         archived_at=archive
     )
 
+    # Create the default view
+    site.action.resource_create_default_resource_views(response)
+
 # This function deletes all of the datasets and organizations in the database so that the import can
 # be ran without any conflicts with existing datasets.
 def delete_all_datasets(site):
