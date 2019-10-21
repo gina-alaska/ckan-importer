@@ -86,6 +86,31 @@ def create_dataset(site, record, org, archive):
             'value': record['end_date']
         })
 
+    if 'iso_topics' in record and record['iso_topics'] != None:
+        package['extras'].append({
+            'key': 'iso_topics',
+            'value': record['iso_topics']
+        })
+
+    if 'geo_keywords' in record and record['geo_keywords'] != None:
+        package['extras'].append({
+            'key': 'geo_keywords',
+            'value': record['geo_keywords']
+        })
+
+    if 'record_type' in record and record['record_type'] != None:
+        package['extras'].append({
+            'key': 'record_type',
+            'value': record['record_type']
+        })
+
+    if 'data_types' in record and record['data_types'] != None:
+        package['extras'].append({
+            'key': 'data_types',
+            'value': record['data_types']
+        })
+
+
     if 'wkt' in record and record['wkt'] != None:
         geojson = convert_geometrycollection(record['wkt'])
         package['extras'].append({
