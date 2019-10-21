@@ -1,13 +1,46 @@
 # Functions for CKAN importer for Glynx JSON data
 import datetime
 import re
+import geojson
+import json
+import shapely.wkt, shapely.geometry
 
-def create_organization(site, orgname):
+
+# ckanext-spatial does not support GeometryCollections.
+# This function converts homogenous GeometryCollections into their corresponding
+# multi-part geometry (MultiPoint, MultiLineString, or MultiPolygon).
+def convert_geometrycollection(wkt):
+    wkt_obj = shapely.wkt.loads(wkt)
+
+    # Get geometry type (Point, Line, String) of first geom.
+    first_geom_type = wkt_obj.geoms[0].geom_type
+
+    geom_types = map(lambda x: x.geom_type, wkt_obj.geoms)
+    total_geoms = len(wkt_obj.geoms)
+    matching_geoms = geom_types.count(first_geom_type)
+
+    # Make sure all geoms in GeometryCollection have same type as the first.
+    if matching_geoms == total_geoms:
+        geom_types = first_geom_type
+
+        # Convert list of geoms into corresponding multi-part geometry.
+        if geom_types == 'Point':
+            wkt_converted = shapely.geometry.MultiPoint(wkt_obj.geoms)
+        elif geom_types == 'LineString':
+            wkt_converted= shapely.geometry.MultiLineString(wkt_obj.geoms)
+        elif geom_types == 'Polygon':
+            wkt_converted = shapely.geometry.MultiPolygon(wkt_obj.geoms)
+
+    # Return as a GeoJSON string.
+    geom_json = geojson.Feature(geometry=wkt_converted, properties={})
+    return json.dumps(geom_json['geometry'])
+
+def create_organization(site, org_slug, org_title, org_desc):
     # Create a new Organization.
     response = site.action.organization_create(
-        name=orgname,
-        title=orgname,
-        description='please change this',
+        name=org_slug,
+        title=org_title,
+        description=org_desc,
         #image_url='https://path/to/image',
         #extras=[{
         #    'key': 'acronym',
@@ -24,40 +57,37 @@ def create_dataset(site, record, org, archive):
     if slug == None:
         slug = record['title'].lower().replace(" ", "_")
 
-    newslug = re.sub('[^a-zA-Z0-9 \-_\n\.]', '', slug)
-    newslug = newslug.replace(".", "")
-    record['slug'] = newslug[:100]
+    newslug = record['slug']
+    newslug = re.sub("[^a-zA-Z0-9 \-_\n\.]", "", newslug)
     print("**** importing " + newslug)
 
-    # Make sure that the status is set to something
-    if record['status'] == None:
-        record['status'] = "Unknown"
+    package = {
+        'title': record['title'],
+        'notes': record['description'],
+        'name': newslug,
+        'extras': []
+    }
 
-    # Set bounds if available
-    if record['bounds']:
-        bounds_value = record['bounds'][0]['geom']
-    else:
-        bounds_value  = ""
+    if 'status' in record and record['status'] != None:
+        package['extras'].append({
+            'key': 'status',
+            'value': record['status']
+        })
+
+    if 'wkt' in record and record['wkt'] != None:
+        geojson = convert_geometrycollection(record['wkt'])
+
+        package['extras'].append({
+            'key': 'spatial',
+            'value': geojson
+        })
+
+    if org != None:
+        package['owner_org'] = org
 
     # Create the dataset
     print("###### importing metadata")
-    response = site.action.package_create(
-        title=record['title'],
-        notes=record['description'],
-        name=record['slug'],
-        # maintainer='Example Maintainer',
-        # maintainer_email='maintainer@example.com',
-        status=record['status'],                  # Custom field with validator.
-        # archived_at=record['archived_at'],      # Custom field with validator.
-        archived_at=archive,
-        # archived_at=str(datetime.datetime.now().isoformat()), # Custom field with validator.
-        iso_topic_category='001',                 # Custom field with validator.
-        extras=[{
-            'key': 'spatial',               # Picked up by ckanext-spatial.
-            'value': bounds_value
-        }],
-        owner_org=org
-    )
+    site.call_action('package_create', package)
 
     # Process record links
     print("###### importing links")
@@ -89,7 +119,7 @@ def attach_file(package_title, site, file, archive):
         package_id=package_title,
         upload=open('export/files/' + file["file_name"], 'rb'),
         name=file["description"],
-        size=file["size"],
+        size=file["file_size"],
         archived_at=archive
     )
 

@@ -1,1 +1,364 @@
-[ {"title":"Example record","description":"This is an example record","status":"Complete","slug":null,"start_date":null,"end_date":null,"attachments":{},"bounds":{},"links":{},"organizations":{},"collections":{}}, {"title":"test","description":"test","status":"Complete","slug":null,"start_date":null,"end_date":null,"attachments":{"file_name":"glynx_2_iso19115-2_metadata.xml","file_size":9768,"category":"Metadata","description":"glynx iso19115-2 metadata"},"bounds":{},"links":{"url":"http://google.com","category":"Website","display_text":"Test"},"organizations":{"name":"test org","category":"Academic","description":"test organization","logo_name":null},"collections":{}}]
+[
+  {
+    "title": "Perceptions and Spatial effects of Human-Bear Encounters across the Pacific Rim",
+    "description": "<p>This study is the first approach to treat human-bear interactions as a social-ecological system across time and space. Analyses combine both, social and ecological methodologies. The goal is to obtain detailed and structured results describing the linkages between social perceptions, land-use change and urbanization. Those linkages will help to identify key factors that can achieve resilient bear conservation while managing for an increasing human footprint in Northern regions.</p>\r\n<p>On the spatial scale this research approach compares Sakhalin Island, Russian Far East, with Alaska, focusing on the human-urban interface around Yuzhno, the largest city on Sakhalin Island, and the Anchorage-Kenai Peninsula region in Southern Alaska. Comparison across the Pacific Rim holds its strength in similarities (like economic interests in oil and gas development, fisheries) and key differences (implementation of a bear management) between regions. Methods include a mixed methods approach to gain qualitative and quantitative information from local people, remote sensing to generate maps in relation to urbanisation and land-use, and predictive modelling analysing relationships between parameters. The time-extend combines data from the 1990ies till today in three 10 year intervals. All research is carried out in both study regions in the same fashion, and compared will help understand key factors increasing human-bear encounters in each region. Results will show positive as well as negative (conflict) encounters between humans and bears, and model hot spots; for both encounter types in relation to urbanization and habitat. Additionally residentsperceptions will be compared, and future human-bear encounters predicted.</p>",
+    "status": "Ongoing",
+    "slug": "6857-perceptions-and-spatial-effects-of-human-bear-e",
+    "start_date": null,
+    "end_date": null,
+    "attachments": [],
+    "bounds": [
+      {
+        "geom": "POLYGON ((-151.90671157114195 45.854930750463865, 144.72249360705513 45.854930750463865, 144.72249360705513 62.20505177841091, -151.90671157114195 62.20505177841091, -151.90671157114195 45.854930750463865))",
+        "type": "Attachment"
+      }
+    ],
+    "links": [
+      {
+        "url": "http://ram.uaa.alaska.edu/research.html",
+        "category": "Website",
+        "display_text": "Human-Bear Encounters"
+      }
+    ],
+    "organizations": [
+      {
+        "category": "Academic",
+        "logo_name": "09_31_36_595_UAF_Logo.png",
+        "name": "University of Alaska Fairbanks",
+        "description": null,
+        "agency_type": "Primary"
+      },
+      {
+        "category": "Academic",
+        "logo_name": "09_42_45_439_UAA_300x300.png",
+        "name": "University of Alaska Anchorage",
+        "description": "The University of Alaska Anchorage is the state’s largest post-secondary institution. UAA is comprised of six teaching units at the Anchorage campus, and four community campuses.",
+        "agency_type": "Other"
+      }
+    ],
+    "collections": [
+      {
+        "hidden": false,
+        "name": "Ongoing Kenai Peninsula Projects",
+        "description": null
+      }
+    ],
+    "iso_topics": "biota, society",
+    "tags": [
+      "Russia",
+      "SES",
+      "bears"
+    ],
+    "record_type": "Project",
+    "geo_keywords": "Kenai Peninsula, Southcentral"
+  },
+  {
+    "title": "Identifying Key Habitats for Juvenile Salmon in the Fox River Flats Estuary",
+    "description": "<strong>Project Abstract</strong><br>\r\n<p>This project offers the first scientific research of fish communities in the Fox River Flats Critical Habitat Area, located in Kachemak Bay, southern Cook Inlet, Alaska. Fish assemblages were assessed in a variety of habitats initially, with research becoming focused on juvenile salmon in four tidal channel habitats spanning an estuarine gradient from oligohaline near the top of the estuary to euryhaline near the mouth. Water temperature, salinity and depth in these channels were driven by varying mixing of glacial melt water from the Fox River and tidal influence. Over 14,000 fish were sampled in the four tidal channels over the duration of the project. Juvenile Coho and Sockeye salmon were the most abundant species in the channels, with both species peaking in July, with densities of 30 Coho/m and 18 sockeye/m. Both species were present from at least late April through early October. Diet samples were analyzed from 113 Coho and 104 Sockeye. Juvenile Coho and Sockeye salmon fed on 83 different prey taxa overall, with Sockeye having somewhat more compressed diets than Coho salmon. Seasonal bioenergetic models show high rates of growth in August (0.15-0.19 g g<sup>-1</sup> d<sup>-1</sup>), likely fueled by high consumption rates and high energy density of prey. The prolonged presence and active feeding, substantiates that the Fox River estuary provides is providing beneficial rearing and outmigration staging habitats for juvenile Coho and Sockeye salmon. </p>",
+    "status": "Complete",
+    "slug": "7144-identifying-key-habitats-for-juvenile-salmon-in",
+    "start_date": null,
+    "end_date": null,
+    "attachments": [],
+    "bounds": [
+      {
+        "geom": "POLYGON ((-151.0231850734723 59.780971952853186, -150.8988876575065 59.780971952853186, -150.8988876575065 59.81522399959277, -151.0231850734723 59.81522399959277, -151.0231850734723 59.780971952853186))",
+        "type": "Attachment"
+      }
+    ],
+    "links": [],
+    "organizations": [
+      {
+        "category": "Federal",
+        "logo_name": "09_43_17_665_FWS_300x300.png",
+        "name": "US Fish and Wildlife Service",
+        "description": null,
+        "agency_type": "Funding"
+      },
+      {
+        "category": "State",
+        "logo_name": "12_24_29_993_logo_ADFG.png",
+        "name": "Kachemak Bay Research Reserve",
+        "description": null,
+        "agency_type": "Other"
+      },
+      {
+        "category": "Federal",
+        "logo_name": "15_28_23_93_logo_NOAA.png",
+        "name": "National Oceanic and Atmospheric Administration ",
+        "description": "NOAA is an US Federal agency that enriches life through science.",
+        "agency_type": "Primary"
+      },
+      {
+        "category": "Academic",
+        "logo_name": "12_42_43_273_UW_SAFS.png",
+        "name": "University of Washington School of Aquatic and Fishery Sciences",
+        "description": null,
+        "agency_type": "Other"
+      }
+    ],
+    "collections": [],
+    "iso_topics": "biota",
+    "tags": [
+      "bioenergetics",
+      "coho salmon - CO",
+      "estuaries",
+      "estuary",
+      "glacial landscape",
+      "growth",
+      "insect prey",
+      "residency",
+      "Salmon",
+      "saltmarsh",
+      "sockeye salmon - S",
+      "diet"
+    ],
+    "primary_contact": {
+      "name": "Walker, Coowe",
+      "email": "Coowe.Walker@alaska.gov"
+    },
+    "geo_keywords": "Alaska, Kenai Peninsula",
+    "record_type": "Project",
+    "data_types": "Report"
+  },
+  {
+    "title": "AK EPSCoR SCTC Sensor Locations",
+    "description": "Interactive web map showing the locations of various sensors used by Alaska EPSCoR Southcentral Test Case researchers. These sensors are located on the Kenai Peninsula and throughout southcentral Alaska. Sensor instruments include river and lake water sensors, weather stations, aerial and satellite imagery and soil monitors. \r\n\r\n<div>\r\n<style>.embed-container {position: relative; padding-bottom: 61%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style>\r\n<div class=\"embed-container\">\r\n<iframe width=\"657\" height=\"400\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" title=\"SCTC Sensors\" src=\"http://www.arcgis.com/apps/Embed/index.html?webmap=faa46795fada48359d14e4b90c4c2044&amp;extent=-151.5953,59.9615,-148.3571,60.8379&amp;zoom=true&amp;scale=true&amp;disable_scroll=true&amp;theme=light\">\r\n</iframe>\r\n</div>\r\n</div>",
+    "status": "Ongoing",
+    "slug": "7062-ak-epscor-sctc-sensor-locations",
+    "start_date": "2013/01/01",
+    "end_date": null,
+    "attachments": [
+      {
+        "category": "Public Download",
+        "file_name": "sctc_sensor_locations_shapefile.zip",
+        "description": "Sensor Locations Shapefile",
+        "file_size": 9276
+      },
+      {
+        "category": "Primary Thumbnail",
+        "file_name": "EPSCoR_sensors.PNG",
+        "description": "AK EPSCoR SCTC Sensors",
+        "file_size": 132314
+      }
+    ],
+    "bounds": [
+      {
+        "geom": "POLYGON ((-152.01421088264297 59.04740105591295, -147.8475833867603 59.04740105591295, -147.8475833867603 61.05008771338108, -152.01421088264297 61.05008771338108, -152.01421088264297 59.04740105591295))",
+        "type": "Attachment"
+      }
+    ],
+    "links": [
+      {
+        "url": "http://bit.ly/1d485Xj",
+        "category": "Website",
+        "display_text": "Southcentral Test Case Sensor Map"
+      }
+    ],
+    "organizations": [
+      {
+        "category": "Academic",
+        "logo_name": "09_42_45_439_UAA_300x300.png",
+        "name": "University of Alaska Anchorage",
+        "description": "The University of Alaska Anchorage is the state’s largest post-secondary institution. UAA is comprised of six teaching units at the Anchorage campus, and four community campuses.",
+        "agency_type": "Primary"
+      },
+      {
+        "category": "Academic",
+        "logo_name": "09_20_38_65_EPSCoR_300x300.png",
+        "name": "EPSCoR - Alaska Adapting to Changing Environments",
+        "description": "Experimental Program to Stimulate Competitive Research - A nationwide research funding program administered by the National Science Foundation.    http://www.alaska.edu/epscor/",
+        "agency_type": "Funding"
+      },
+      {
+        "category": "Federal",
+        "logo_name": "6jc8g1ukz3_NSF.png",
+        "name": "National Science Foundation",
+        "description": "The National Science Foundation (NSF) is an independent federal agency created by Congress in 1950 \"to promote the progress of science; to advance the national health, prosperity, and welfare; to secure the national defense…\"",
+        "agency_type": "Other"
+      }
+    ],
+    "collections": [
+      {
+        "hidden": false,
+        "name": "Alaska EPSCoR Southcentral Test Case",
+        "description": "The Southcentral Test Case, based at the University of Alaska Anchorage, focuses on drivers of change in the communities of the Kenai River watershed. This collection includes data from work completed by Alaska EPSCoR Southcentral test case researchers and partners."
+      }
+    ],
+    "tags": [
+      "epscor",
+      "meteorologic",
+      "remote sensing",
+      "hydrography"
+    ],
+    "primary_contact": {
+      "name": "Rinella, Dan",
+      "email": "rinella@uaa.alaska.edu"
+    },
+    "geo_keywords": "Kenai Peninsula, Southcentral",
+    "record_type": "Project",
+    "data_types": "Map, GIS"
+  },
+  {
+    "title": "2013 Aerial Orthoimagery - Crea Creek Watershed Area",
+    "description": "This RGB and CIR imagery comes from a high resolution LiDAR dataset of the Crea Creek Watershed Area, and is part of a series of 2013 LiDAR and imagery collections by EPSCoR Northern Test Case.",
+    "status": "Complete",
+    "slug": "11476-2013-aerial-orthoimagery-crea-creek-watershed",
+    "start_date": null,
+    "end_date": null,
+    "attachments": [
+      {
+        "category": "Primary Thumbnail",
+        "file_name": "2013_RGB_Ortho_NTC_Crea.png",
+        "description": "",
+        "file_size": 459671
+      }
+    ],
+    "bounds": [
+      {
+        "geom": "POLYGON ((-151.51082326023516 70.2053597596555, -151.22901612788309 70.2053597596555, -151.22901612788309 70.31097201096942, -151.51082326023516 70.31097201096942, -151.51082326023516 70.2053597596555))",
+        "type": "Attachment"
+      }
+    ],
+    "links": [
+      {
+        "url": "http://epscor.alaska.edu/catalogs/11475-lidar-data-crea-creek-watershed-area",
+        "category": "Website",
+        "display_text": "Crea Creek LiDAR data record"
+      }
+    ],
+    "organizations": [
+      {
+        "category": "Academic",
+        "logo_name": "09_20_38_65_EPSCoR_300x300.png",
+        "name": "EPSCoR - Alaska Adapting to Changing Environments",
+        "description": "Experimental Program to Stimulate Competitive Research - A nationwide research funding program administered by the National Science Foundation.    http://www.alaska.edu/epscor/",
+        "agency_type": "Funding"
+      },
+      {
+        "category": "Federal",
+        "logo_name": "6jc8g1ukz3_NSF.png",
+        "name": "National Science Foundation",
+        "description": "The National Science Foundation (NSF) is an independent federal agency created by Congress in 1950 \"to promote the progress of science; to advance the national health, prosperity, and welfare; to secure the national defense…\"",
+        "agency_type": "Primary"
+      }
+    ],
+    "collections": [
+      {
+        "hidden": false,
+        "name": "LiDAR for Crea Creek & Nuiqsut",
+        "description": null
+      }
+    ],
+    "geo_keywords": "Alaska, Arctic, Northslope Borough",
+    "tags": [
+      "CIR",
+      "crea creek",
+      "epscor",
+      "ntc",
+      "RGB",
+      "aerial"
+    ],
+    "record_type": "Data",
+    "data_types": "Web Service"
+  },
+  {
+    "title": "Environmental Exploitation by the Eskimos of Wainwright, Alaska",
+    "description": "Bane, G. Ray. (1966). Environmental exploitation by the Eskimos of Wainwright. Alaska. Unpubl. Final report for Air Force Contract No. 41(609)-3200. Arctic Aeromedical Laboratory.\r\n\r\nIntensive study of the techniques employed by modern day Eskimos to exploit their natural environment to provide an increased insight into the dynamic relationship that exists between the Eskimo culture and its natural environment. \r\nMr. Richard Nelson, of the Department of Anthropology, University of Wisconsin, has been engaged in intensive ethnographic studies of the Eskimo exploitation of the sea ice (Nelson, 1966). The study that follows is meant to complement Mr. Nelson's work by presenting a description of native exploitation of the inland regions. ",
+    "status": "Complete",
+    "slug": "11489-environmental-exploitation-by-the-eskimos-of-wa",
+    "start_date": null,
+    "end_date": null,
+    "attachments": [
+      {
+        "category": "Primary Thumbnail",
+        "file_name": "Bane_Thumbnail.jpg",
+        "description": "Thumbnail",
+        "file_size": 276324
+      },
+      {
+        "category": "Private Download",
+        "file_name": "Bane_Environmental Exploitation by the Eskimos of Wainwright_1966.pdf",
+        "description": "Environmental Exploitation by the Eskimos of Wainwright, Alaska",
+        "file_size": 6621735
+      }
+    ],
+    "bounds": [
+      {
+        "geom": "POINT (-160.04005013875738 70.63807038981818)",
+        "type": "Attachment"
+      }
+    ],
+    "links": [
+      {
+        "url": "https://drive.google.com/open?id=0BxyBj6oTSCvOTFoxOEpvWUZRMVU",
+        "category": "Download",
+        "display_text": "Permission required"
+      }
+    ],
+    "organizations": [],
+    "collections": [
+      {
+        "hidden": false,
+        "name": "Wainwright Research",
+        "description": null
+      }
+    ],
+    "geo_keywords": "Arctic, Northslope Borough",
+    "tags": [
+      "marine life",
+      "natural resources",
+      "caribou",
+      "subsistence",
+      "Wainwright"
+    ],
+    "record_type": "Project",
+    "data_types": "Report"
+  },
+  {
+    "title": "Airborne Thermal Infrared Remote Sensing, Anchor River Basin, Alaska",
+    "description": "<p>With support from the U.S. Fish and Wildlife Service to continue this important work, Cook Inletkeeper contracted with Watershed Sciences, Inc. to map cold water habitat and provide airborne thermal infrared (TIR) imagery for 66 miles of the Anchor River and 12 miles of the Ninilchik River. The focus for this work are the springs and upwellings that provide salmon with the cold-water stepping stones needed to make their way up and down otherwise warming streams, and also the warmer, ice-free nooks for overwintering juvenile salmon. The identification of these refugia as a key component to strategic conservation planning provides the best hope to embrace realistic climate adaptation strategies for salmon protection.</p>\r\n<p>Watershed Sciences flew the South Fork Anchor River on June 30th, 2010 and the North Fork Anchor River and Ninilchik River on July 10, 2012. They flew at an altitude of 2,000 feet and the TIR sensors collected images every second which resulted in a 2-foot image resolution. And even in the cool summer of 2010, the location and thermal influence of 18 tributaries, 23 seeps and springs, 11 sloughs, and 9 small side channels and drains is apparent in the South Fork Anchor River imagery.</p>",
+    "status": "Complete",
+    "slug": "6856-airborne-thermal-infrared-remote-sensing-ancho",
+    "start_date": null,
+    "end_date": null,
+    "attachments": [],
+    "bounds": [
+      {
+        "geom": "POINT (-151.6704189324786 59.71647915839777)",
+        "type": "Attachment"
+      }
+    ],
+    "links": [
+      {
+        "url": "http://inletkeeper.org/",
+        "category": "Website",
+        "display_text": "Cook Inletkeeper"
+      }
+    ],
+    "organizations": [
+      {
+        "category": "Federal",
+        "logo_name": "09_43_17_665_FWS_300x300.png",
+        "name": "US Fish and Wildlife Service",
+        "description": null,
+        "agency_type": "Funding"
+      },
+      {
+        "category": "Non-Governmental",
+        "logo_name": "09_17_11_117_Cook_inletkeeper_logo.png",
+        "name": "Cook Inletkeeper",
+        "description": "Cook Inletkeeper is a community-based nonprofit organization that combines advocacy, education and science toward its mission to protect Alaska’s Cook Inlet watershed and the life it sustains.",
+        "agency_type": "Primary"
+      }
+    ],
+    "collections": [],
+    "geo_keywords": "Kenai Peninsula",
+    "tags": [
+      "remote sensing",
+      "infrared"
+    ],
+    "record_type": "Project",
+    "data_types": "Report"
+  }
+]
