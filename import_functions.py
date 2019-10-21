@@ -110,6 +110,8 @@ def create_dataset(site, record, org, archive):
             'value': record['data_types']
         })
 
+    if 'tags' in record and len(record['tags']) > 0:
+        package['tags'] = map(lambda x: {'name': re.sub('[^a-zA-Z0-9 \-_\n\.]', '', x)}, record['tags'])
 
     if 'wkt' in record and record['wkt'] != None:
         geojson = convert_geometrycollection(record['wkt'])
