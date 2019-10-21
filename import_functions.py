@@ -141,7 +141,7 @@ def create_dataset(site, record, org, archive):
     # Process attachments
     print("###### importing attachments")
     for attachment in record["attachments"]:
-        if attachment == {}:
+        if attachment == {} or attachment['category'] == "Private Download":
             continue
         attach_file(record['slug'], site, attachment, archive)
 
