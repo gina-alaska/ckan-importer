@@ -74,9 +74,20 @@ def create_dataset(site, record, org, archive):
             'value': record['status']
         })
 
+    if 'start_date' in record and record['start_date'] != None:
+        package['extras'].append({
+            'key': 'start_date',
+            'value': record['start_date']
+        })
+
+    if 'end_date' in record and record['end_date'] != None:
+        package['extras'].append({
+            'key': 'end_date',
+            'value': record['end_date']
+        })
+
     if 'wkt' in record and record['wkt'] != None:
         geojson = convert_geometrycollection(record['wkt'])
-
         package['extras'].append({
             'key': 'spatial',
             'value': geojson
