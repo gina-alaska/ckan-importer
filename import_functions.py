@@ -68,6 +68,10 @@ def create_dataset(site, record, org, archive):
         'extras': []
     }
 
+    if 'primary_contact' in record and record['primary_contact'] != None:
+        package['maintainer'] = record['primary_contact']['name']
+        package['maintainer_email'] = record['primary_contact']['email']
+
     if 'status' in record and record['status'] != None:
         package['extras'].append({
             'key': 'status',
