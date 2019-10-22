@@ -56,9 +56,8 @@ for file in os.listdir("export"):
             glynxdata = json.load(read_file)
 
 for record in glynxdata:
-    org_slug = None
-    org_title = None
-    org_desc = None
+    organization = None
+    collections = []
 
     if 'organizations' in record:
         for org in record['organizations']:
@@ -66,6 +65,7 @@ for record in glynxdata:
                 org_slug = re.sub("\W+", "_", org['name']).lower()
                 org_title = org['name']
                 org_desc = org['description']
+                organization = org_slug
 
                 # We are attempting to create an organization for every package,
                 # but this creates problems since the same organization will
@@ -81,6 +81,7 @@ for record in glynxdata:
             col_slug = re.sub("\W+", "_", col['name']).lower()
             col_title = col['name']
             col_desc = col['description']
+            collections.append(col_slug)
 
             # We are attempting to create an collections for every package,
             # but this creates problems since the same collections will
@@ -94,7 +95,7 @@ for record in glynxdata:
     # temp archive data
     archive=str(datetime.datetime.now().isoformat())
 
-    imp.create_dataset(site, record, org_slug, archive)
+    imp.create_dataset(site, record, organization, collections, archive)
 
 # Close report file
 if args.report:

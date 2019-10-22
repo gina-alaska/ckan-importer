@@ -77,7 +77,7 @@ def create_collection(site, col_slug, col_title, col_desc):
     return response
 
 # Create a new Dataset.
-def create_dataset(site, record, org, archive):
+def create_dataset(site, record, organization, collections, archive):
 
     # Make sure that the slug will pass CKAN validation
     slug = record['slug']
@@ -151,8 +151,12 @@ def create_dataset(site, record, org, archive):
             'value': geojson
         })
 
-    if org != None:
-        package['owner_org'] = org
+    if organization != None:
+        package['owner_org'] = organization
+
+    if len(collections) > 0:
+        groups = map(lambda x: {'name': x}, collections)
+        package['groups'] = groups
 
     # Create the dataset
     print("###### importing metadata")
