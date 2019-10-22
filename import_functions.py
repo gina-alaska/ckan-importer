@@ -6,32 +6,53 @@ import json
 import shapely.wkt, shapely.geometry
 
 # ckanext-spatial does not support GeometryCollections.
-# This function converts homogenous GeometryCollections into their corresponding
-# multi-part geometry (MultiPoint, MultiLineString, or MultiPolygon).
+# This function converts GeometryCollections into their corresponding
+# single-part (Point, LineString, Polygon) or multi-part (MultiPoint,
+# MultiLineString, or MultiPolygon) geometries.
 def convert_geometrycollection(wkt):
     wkt_obj = shapely.wkt.loads(wkt)
 
-    # Get geometry type (Point, Line, String) of first geom.
-    first_geom_type = wkt_obj.geoms[0].geom_type
-
+    # Get all geom types inside GeometryCollection.
     geom_types = map(lambda x: x.geom_type, wkt_obj.geoms)
-    total_geoms = len(wkt_obj.geoms)
-    matching_geoms = geom_types.count(first_geom_type)
 
-    # Make sure all geoms in GeometryCollection have same type as the first.
-    if matching_geoms == total_geoms:
-        geom_types = first_geom_type
+    # Tally all the types found in this GeometryCollection.
+    # Homogenous GeometryCollections will only have one type to tally.
+    tally = {}
+    for type in geom_types:
+        tally[type] = len(filter(lambda x: x == type, geom_types))
 
-        # Convert list of geoms into corresponding multi-part geometry.
-        if geom_types == 'Point':
-            wkt_converted = shapely.geometry.MultiPoint(wkt_obj.geoms)
-        elif geom_types == 'LineString':
-            wkt_converted= shapely.geometry.MultiLineString(wkt_obj.geoms)
-        elif geom_types == 'Polygon':
-            wkt_converted = shapely.geometry.MultiPolygon(wkt_obj.geoms)
+    print tally
+
+    # If there ever were a heterogenous GeometryCollection, the intention here
+    # is to find what geometry type is used most often and make a new homogenous
+    # geometry based on the most predominent geometry type. There does not
+    # appear to be any heterogenous GeometryCollections in the Alaska EPSCoR
+    # metadata, however, so this has only been tested against homogenous
+    # GeometryCollections.
+    predominant_type = max(tally, key=tally.get)
+
+    # Pull geometries out of their GeometryCollection container in whatever
+    # way is most appropriate.
+    if predominant_type == 'Point':
+        if tally['Point'] > 1:
+            valid_wkt = shapely.geometry.MultiPoint(wkt_obj.geoms)
+        else:
+            valid_wkt = shapely.geometry.Point(wkt_obj.geoms[0])
+    elif predominant_type == 'LineString':
+        if tally['LineString'] > 1:
+            valid_wkt = shapely.geometry.MultiLineString(wkt_obj.geoms)
+        else:
+            valid_wkt = shapely.geometry.LineString(wkt_obj.geoms[0])
+    elif predominant_type == 'Polygon':
+        if tally['Polygon'] > 1:
+            valid_wkt = shapely.geometry.MultiPolygon(wkt_obj.geoms)
+        else:
+            valid_wkt = shapely.geometry.Polygon(wkt_obj.geoms[0])
+    elif predominant_type in ['MultiPoint', 'MultiLineString', 'MultiPolygon']:
+        valid_wkt = wkt_obj.geoms[0]
 
     # Return as a GeoJSON string.
-    geom_json = geojson.Feature(geometry=wkt_converted, properties={})
+    geom_json = geojson.Feature(geometry=valid_wkt, properties={})
     return json.dumps(geom_json['geometry'])
 
 def create_organization(site, org_slug, org_title, org_desc):
