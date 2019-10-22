@@ -5,7 +5,6 @@ import geojson
 import json
 import shapely.wkt, shapely.geometry
 
-
 # ckanext-spatial does not support GeometryCollections.
 # This function converts homogenous GeometryCollections into their corresponding
 # multi-part geometry (MultiPoint, MultiLineString, or MultiPolygon).
@@ -46,6 +45,15 @@ def create_organization(site, org_slug, org_title, org_desc):
         #    'key': 'acronym',
         #    'value': 'EVERGREEN'
         #}]
+    )
+    return response
+
+def create_collection(site, col_slug, col_title, col_desc):
+    # Create a new Group (aka Collection).
+    response = site.action.group_create(
+        name=col_slug,
+        title=col_title,
+        description=col_desc
     )
     return response
 

@@ -76,6 +76,21 @@ for record in glynxdata:
                 except:
                     pass
 
+    if 'collections' in record:
+        for col in record['collections']:
+            col_slug = re.sub("\W+", "_", col['name']).lower()
+            col_title = col['name']
+            col_desc = col['description']
+
+            # We are attempting to create an collections for every package,
+            # but this creates problems since the same collections will
+            # usually show up more than once. This is a temporary hack to
+            # prevent the script from bombing when this happens.
+            try:
+                imp.create_collection(site, col_slug, col_title, col_desc)
+            except:
+                pass
+
     # temp archive data
     archive=str(datetime.datetime.now().isoformat())
 
