@@ -21,8 +21,6 @@ def convert_geometrycollection(wkt):
     for type in geom_types:
         tally[type] = len(filter(lambda x: x == type, geom_types))
 
-    print tally
-
     # If there ever were a heterogenous GeometryCollection, the intention here
     # is to find what geometry type is used most often and make a new homogenous
     # geometry based on the most predominent geometry type. There does not
