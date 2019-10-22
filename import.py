@@ -36,7 +36,7 @@ if args.delete:
         print( 'Cancelled!' )
         exit()
 
-    imp.delete_all_datasets(site)
+    imp.delete_all(site)
     print('All datasets have been deleted.')
     exit()
 

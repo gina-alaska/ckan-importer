@@ -176,9 +176,10 @@ def attach_file(package_title, site, file, archive):
     # Create the default view
     site.action.resource_create_default_resource_views(resource=response)
 
-# This function deletes all of the datasets and organizations in the database so that the import can
-# be ran without any conflicts with existing datasets.
-def delete_all_datasets(site):
+# This function deletes all of the datasets, organizations, and groups in the
+# database so that the import can be ran without any conflicts with existing
+# datasets.
+def delete_all(site):
     datasets = site.action.package_list()
     for dataset in datasets:
         site.action.dataset_purge(id=dataset)
@@ -186,3 +187,7 @@ def delete_all_datasets(site):
     orgs = site.action.organization_list()
     for org in orgs:
         site.action.organization_purge(id=org)
+
+    groups = site.action.group_list()
+    for group in groups:
+        site.action.group_purge(id=group)
