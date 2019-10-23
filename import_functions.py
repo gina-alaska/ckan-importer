@@ -172,8 +172,15 @@ def create_dataset(site, record, organization, collections):
     # Process attachments
     print("###### importing attachments")
     for attachment in record["attachments"]:
-        if attachment == {} or attachment['category'] == "Private Download":
+        if attachment == {}:
             continue
+
+        if attachment['category'] == "Private Download":
+            continue
+
+        if attachment['file_name'] == "imported_locations":
+            continue
+
         attach_file(record['slug'], site, attachment)
 
 # Attach a URL as a resource to an existing Dataset.
