@@ -77,7 +77,7 @@ def create_collection(site, col_slug, col_title, col_desc):
     return response
 
 # Create a new Dataset.
-def create_dataset(site, record, organization, collections, archive):
+def create_dataset(site, record, organization, collections):
 
     # Make sure that the slug will pass CKAN validation
     slug = record['slug']
@@ -167,33 +167,30 @@ def create_dataset(site, record, organization, collections, archive):
     for link in record["links"]:
         if link == {}:
             continue
-        attach_url(record['slug'], site, link, archive)
+        attach_url(record['slug'], site, link)
 
     # Process attachments
     print("###### importing attachments")
     for attachment in record["attachments"]:
         if attachment == {} or attachment['category'] == "Private Download":
             continue
-        attach_file(record['slug'], site, attachment, archive)
+        attach_file(record['slug'], site, attachment)
 
 # Attach a URL as a resource to an existing Dataset.
-def attach_url(package_title, site, link, archive):
+def attach_url(package_title, site, link):
     response = site.action.resource_create(
          package_id=package_title,
          name=link["category"] + " - " + link["display_text"],
-         url=link["url"],
-         archived_at=archive
-         # archived_at=str(datetime.datetime.now().isoformat()) # Custom field with validator.
+         url=link["url"]
     )
 
 # Upload a file resource to DataStore and attach it to an existing Dataset.
-def attach_file(package_title, site, file, archive):
+def attach_file(package_title, site, file):
     response = site.action.resource_create(
         package_id=package_title,
         upload=open('export/files/' + file["file_name"], 'rb'),
         name=file["description"],
-        size=file["file_size"],
-        archived_at=archive
+        size=file["file_size"]
     )
 
     # Create the default view

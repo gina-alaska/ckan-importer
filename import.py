@@ -92,10 +92,7 @@ for record in glynxdata:
             except:
                 pass
 
-    # temp archive data
-    archive=str(datetime.datetime.now().isoformat())
-
-    imp.create_dataset(site, record, organization, collections, archive)
+    imp.create_dataset(site, record, organization, collections)
 
 # Close report file
 if args.report:
