@@ -83,6 +83,13 @@ for record in glynxdata:
             col_desc = col['description']
             collections.append(col_slug)
 
+            # The EPSCoR GLynx export has both an organization and collection
+            # (aka group) with the name "Southeast Alaska GIS Library". CKAN
+            # appears not to allow them to use the same slug, so make the group
+            # slug a little different.
+            if col['name'] == "Southeast Alaska GIS Library":
+                col_slug = col_slug + '_group'
+
             # We are attempting to create an collections for every package,
             # but this creates problems since the same collections will
             # usually show up more than once. This is a temporary hack to
