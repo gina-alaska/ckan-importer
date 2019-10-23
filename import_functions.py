@@ -96,8 +96,17 @@ def create_dataset(site, record, organization, collections):
     }
 
     if 'primary_contact' in record and record['primary_contact'] != None:
-        package['maintainer'] = record['primary_contact']['name']
-        package['maintainer_email'] = record['primary_contact']['email']
+        if 'name' in record['primary_contact']:
+            package['maintainer'] = record['primary_contact']['name']
+
+        if 'email' in record['primary_contact']:
+            package['maintainer_email'] = record['primary_contact']['email']
+
+        if 'phone' in record['primary_contact']:
+            package['extras'].append({
+                'key': 'primary_contact_phone',
+                'value': record['primary_contact']['phone']
+            })
 
     if 'status' in record and record['status'] != None:
         package['extras'].append({
