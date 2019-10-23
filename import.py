@@ -62,7 +62,7 @@ for record in glynxdata:
     if 'organizations' in record:
         for org in record['organizations']:
             if org['agency_type'] == "Primary":
-                org_slug = re.sub("\W+", "_", org['name']).lower()
+                org_slug = re.sub("\W+", "-", org['name']).lower()
                 org_title = org['name']
                 org_desc = org['description']
                 organization = org_slug
@@ -78,7 +78,7 @@ for record in glynxdata:
 
     if 'collections' in record:
         for col in record['collections']:
-            col_slug = re.sub("\W+", "_", col['name']).lower()
+            col_slug = re.sub("\W+", "-", col['name']).lower()
             col_title = col['name']
             col_desc = col['description']
             collections.append(col_slug)
