@@ -3,6 +3,7 @@ import datetime
 import re
 import geojson
 import json
+import os
 import shapely.wkt, shapely.geometry
 
 # ckanext-spatial does not support GeometryCollections.
@@ -55,16 +56,17 @@ def convert_geometrycollection(wkt):
 
 def create_organization(site, org_slug, org_title, org_desc):
     # Create a new Organization.
-    response = site.action.organization_create(
-        name=org_slug,
-        title=org_title,
-        description=org_desc,
-        #image_url='https://path/to/image',
-        #extras=[{
-        #    'key': 'acronym',
-        #    'value': 'EVERGREEN'
-        #}]
-    )
+    organization = {
+        'name': org_slug,
+        'title': org_title,
+        'description': org_desc
+    }
+
+    if os.path.isfile('./logos/' + org_slug + '.png'):
+        organization['image_url'] = 'http://epscorportal.rcs.alaska.edu/images/' + org_slug + '.png'
+
+    response = site.call_action('organization_create', organization)
+
     return response
 
 def create_collection(site, col_slug, col_title, col_desc):
