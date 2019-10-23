@@ -150,6 +150,12 @@ def create_dataset(site, record, organization, collections):
             'value': record['data_types']
         })
 
+    if 'map_layers' in record and record['map_layers'] != None:
+        package['extras'].append({
+            'key': 'map_layers',
+            'value': json.dumps(record['map_layers'])
+        })
+
     if 'tags' in record and len(record['tags']) > 0:
         package['tags'] = map(lambda x: {'name': re.sub('[^a-zA-Z0-9 \-_\n\.]', '', x)}, record['tags'])
 
