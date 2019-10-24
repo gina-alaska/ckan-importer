@@ -210,12 +210,21 @@ def attach_url(package_title, site, link):
 
 # Upload a file resource to DataStore and attach it to an existing Dataset.
 def attach_file(package_title, site, file):
-    response = site.action.resource_create(
-        package_id=package_title,
-        upload=open('export/files/' + file["file_name"], 'rb'),
-        name=file["description"],
-        size=file["file_size"]
-    )
+    attachment = {
+        'package_id': package_title,
+        'size': file['file_size']
+    }
+
+    if file['description'] != '':
+        attachment['name'] = file['description']
+    else:
+        attachment['name'] = file['file_name']
+
+    files = {
+        'upload': open('export/files/' + file['file_name'], 'rb')
+    }
+
+    response = site.call_action('resource_create', attachment, files=files)
 
     # Create the default view
     site.action.resource_create_default_resource_views(resource=response)
