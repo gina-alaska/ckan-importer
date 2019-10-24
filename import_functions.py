@@ -63,7 +63,7 @@ def create_organization(site, org_slug, org_title, org_desc):
     }
 
     if os.path.isfile('./logos/' + org_slug + '.png'):
-        organization['image_url'] = 'http://epscorportal.rcs.alaska.edu/images/' + org_slug + '.png'
+        organization['image_url'] = 'http://epscorportal.rcs.alaska.edu/images/logos/' + org_slug + '.png'
 
     response = site.call_action('organization_create', organization)
 
