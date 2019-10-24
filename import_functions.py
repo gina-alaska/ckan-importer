@@ -215,10 +215,10 @@ def attach_file(package_title, site, file):
         'size': file['file_size']
     }
 
-    if file['description'] != '':
-        attachment['name'] = file['description']
-    else:
+    if file['description'] == '' or file['description'] == None:
         attachment['name'] = file['file_name']
+    else:
+        attachment['name'] = file['description']
 
     files = {
         'upload': open('export/files/' + file['file_name'], 'rb')
