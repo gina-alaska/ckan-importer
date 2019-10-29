@@ -1,6 +1,7 @@
 # Functions for CKAN importer for Glynx JSON data
 import datetime
 import re
+import json
 
 def create_organization(site, orgname):
     # Create a new Organization.
