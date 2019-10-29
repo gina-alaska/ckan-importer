@@ -60,7 +60,7 @@ def create_dataset(site, record, org, archive):
     for link in record["links"]:
         if link == {}:
             continue
-        attach_url(record['slug'], site, link, archive)
+        attach_url(record['slug'], site, link)
 
     # Process attachments
     print("###### importing attachments")
