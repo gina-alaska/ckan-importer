@@ -61,7 +61,7 @@ def create_dataset(site, record, org, archive):
     for link in record["links"]:
         if link == {}:
             continue
-        attach_url(record['slug'], site, link)
+        attach_url(record['slug'], site, link, archive)
 
     # Process attachments
     print("###### importing attachments")
@@ -83,11 +83,12 @@ def create_dataset(site, record, org, archive):
             attach_file(record['slug'], site, attachment)
 
 # Attach a URL as a resource to an existing Dataset.
-def attach_url(package_title, site, link):
+def attach_url(package_title, site, link, archive):
     response = site.action.resource_create(
          package_id=package_title,
          name=link["category"] + " - " + link["display_text"],
-         url=link["url"]
+         url=link["url"],
+         archived_at=archive
     )
 
 # Upload a file resource to DataStore and attach it to an existing Dataset.
