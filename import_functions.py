@@ -52,10 +52,6 @@ def create_dataset(site, record, org, archive):
         archived_at=archive,
         # archived_at=str(datetime.datetime.now().isoformat()), # Custom field with validator.
         iso_topic_category='001',                 # Custom field with validator.
-        extras=[{
-            'key': 'spatial',               # Picked up by ckanext-spatial.
-            'value': bounds_value
-        }],
         owner_org=org
     )
 
@@ -71,33 +67,42 @@ def create_dataset(site, record, org, archive):
     for attachment in record["attachments"]:
         if attachment == {}:
             continue
-        attach_file(record['slug'], site, attachment, archive)
+        if attachment["file_name"] == "imported_locations":
+            json_file = ""
+            with open('export/files/' + attachment["file_name"]) as json_file:
+                json_file = json.load(json_file)
+
+            site.action.package_patch(
+                record['slug'],
+                extras=[{
+                    'key': 'spatial',
+                    'value': json_file
+                }])
+        else:
+            attach_file(record['slug'], site, attachment)
 
 # Attach a URL as a resource to an existing Dataset.
-def attach_url(package_title, site, link, archive):
+def attach_url(package_title, site, link):
     response = site.action.resource_create(
          package_id=package_title,
          name=link["category"] + " - " + link["display_text"],
-         url=link["url"],
-         archived_at=archive
-         # archived_at=str(datetime.datetime.now().isoformat()) # Custom field with validator.
+         url=link["url"]
     )
 
 # Upload a file resource to DataStore and attach it to an existing Dataset.
-def attach_file(package_title, site, file, archive):
+def attach_file(package_title, site, file):
     response = site.action.resource_create(
         package_id=package_title,
         upload=open('export/files/' + file["file_name"], 'rb'),
         name=file["description"],
-        size=file["size"],
-        archived_at=archive
+        size=file["size"]
     )
 
     # Create the default view
     site.action.resource_create_default_resource_views(resource=response)
 
-# This function deletes all of the datasets and organizations in the database so that the import can
-# be ran without any conflicts with existing datasets.
+# This function deletes all of the datasets, organizations, and groups in the database so that the
+# import can be ran without any conflicts with existing datasets.
 def delete_all_datasets(site):
     datasets = site.action.package_list()
     for dataset in datasets:
@@ -106,3 +111,7 @@ def delete_all_datasets(site):
     orgs = site.action.organization_list()
     for org in orgs:
         site.action.organization_purge(id=org)
+
+    groups = site.action.group_list()
+    for group in groups:
+        site.action.group_purge(id=group)
