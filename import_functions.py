@@ -127,7 +127,7 @@ def create_dataset(site, record, org, archive):
             # print(g2.wkt)
 
             response = site.action.package_patch(
-                record['slug'],
+                package_id=record['slug'],
                 extras=[{
                     'key': 'spatial',
                     'value': json_file
