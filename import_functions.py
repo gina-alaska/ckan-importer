@@ -73,12 +73,13 @@ def create_dataset(site, record, org, archive):
             with open('export/files/' + attachment["file_name"]) as json_file:
                 json_file = json.load(json_file)
 
-            site.action.package_patch(
+            response = site.action.package_patch(
                 record['slug'],
                 extras=[{
                     'key': 'spatial',
                     'value': json_file
-                }])
+                }]
+            )
         else:
             attach_file(record['slug'], site, attachment)
 
