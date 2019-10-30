@@ -122,15 +122,15 @@ def create_dataset(site, record, org, archive):
             json_file = ""
             with open('export/files/' + attachment["file_name"]) as file:
                 json_file = file.read()
-            g1 = geojson.loads(json_file)
-            g2 = shapely.geometry.shape(g1)
-            print(g2.wkt)
+            # g1 = geojson.loads(json_file)
+            # g2 = shapely.geometry.shape(g1)
+            # print(g2.wkt)
 
             response = site.action.package_patch(
                 record['slug'],
                 extras=[{
                     'key': 'spatial',
-                    'value': convert_geometrycollection(g2.wkt)
+                    'value': json_file
                 }]
             )
         else:
