@@ -2,6 +2,7 @@
 import datetime
 import re
 import json
+import geojson
 import shapely.wkt, shapely.geometry
 
 # ckanext-spatial does not support GeometryCollections.
