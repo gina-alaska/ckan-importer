@@ -70,8 +70,9 @@ def create_dataset(site, record, org, archive):
             continue
         if attachment["file_name"] == "imported_locations":
             json_file = ""
-            with open('export/files/' + attachment["file_name"]) as json_file:
-                json_file = json.load(json_file)
+            with open('export/files/' + attachment["file_name"]) as file:
+                json_file = file.read()
+            print(json_file)
 
             response = site.action.package_patch(
                 record['slug'],
