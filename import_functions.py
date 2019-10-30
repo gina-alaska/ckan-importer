@@ -2,6 +2,55 @@
 import datetime
 import re
 import json
+import shapely.wkt, shapely.geometry
+
+# ckanext-spatial does not support GeometryCollections.
+# This function converts GeometryCollections into their corresponding
+# single-part (Point, LineString, Polygon) or multi-part (MultiPoint,
+# MultiLineString, or MultiPolygon) geometries.
+def convert_geometrycollection(wkt):
+    wkt_obj = shapely.wkt.loads(wkt)
+
+    # Get all geom types inside GeometryCollection.
+    geom_types = map(lambda x: x.geom_type, wkt_obj.geoms)
+
+    # Tally all the types found in this GeometryCollection.
+    # Homogenous GeometryCollections will only have one type to tally.
+    tally = {}
+    for type in geom_types:
+        tally[type] = len(filter(lambda x: x == type, geom_types))
+
+    # If there ever were a heterogenous GeometryCollection, the intention here
+    # is to find what geometry type is used most often and make a new homogenous
+    # geometry based on the most predominent geometry type. There does not
+    # appear to be any heterogenous GeometryCollections in the Alaska EPSCoR
+    # metadata, however, so this has only been tested against homogenous
+    # GeometryCollections.
+    predominant_type = max(tally, key=tally.get)
+
+    # Pull geometries out of their GeometryCollection container in whatever
+    # way is most appropriate.
+    if predominant_type == 'Point':
+        if tally['Point'] > 1:
+            valid_wkt = shapely.geometry.MultiPoint(wkt_obj.geoms)
+        else:
+            valid_wkt = shapely.geometry.Point(wkt_obj.geoms[0])
+    elif predominant_type == 'LineString':
+        if tally['LineString'] > 1:
+            valid_wkt = shapely.geometry.MultiLineString(wkt_obj.geoms)
+        else:
+            valid_wkt = shapely.geometry.LineString(wkt_obj.geoms[0])
+    elif predominant_type == 'Polygon':
+        if tally['Polygon'] > 1:
+            valid_wkt = shapely.geometry.MultiPolygon(wkt_obj.geoms)
+        else:
+            valid_wkt = shapely.geometry.Polygon(wkt_obj.geoms[0])
+    elif predominant_type in ['MultiPoint', 'MultiLineString', 'MultiPolygon']:
+        valid_wkt = wkt_obj.geoms[0]
+
+    # Return as a GeoJSON string.
+    geom_json = geojson.Feature(geometry=valid_wkt, properties={})
+    return json.dumps(geom_json['geometry'])
 
 def create_organization(site, orgname):
     # Create a new Organization.
@@ -78,7 +127,7 @@ def create_dataset(site, record, org, archive):
                 record['slug'],
                 extras=[{
                     'key': 'spatial',
-                    'value': json_file
+                    'value': convert_geometrycollection(json_file)
                 }]
             )
         else:
