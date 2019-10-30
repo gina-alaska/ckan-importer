@@ -121,13 +121,15 @@ def create_dataset(site, record, org, archive):
             json_file = ""
             with open('export/files/' + attachment["file_name"]) as file:
                 json_file = file.read()
-            print(json_file)
+            g1 = geojson.loads(json_file)
+            g2 = shape(g1)
+            print(g2.wkt)
 
             response = site.action.package_patch(
                 record['slug'],
                 extras=[{
                     'key': 'spatial',
-                    'value': convert_geometrycollection(json_file)
+                    'value': convert_geometrycollection(g2.wkt)
                 }]
             )
         else:
