@@ -125,6 +125,7 @@ def create_dataset(site, record, org, archive):
             # g1 = geojson.loads(json_file)
             # g2 = shapely.geometry.shape(g1)
             # print(g2.wkt)
+            print(json_file)
 
             response = site.action.package_patch(
                 package_id=record['slug'],
