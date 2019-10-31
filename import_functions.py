@@ -128,7 +128,7 @@ def create_dataset(site, record, org, archive):
             print(json_file)
 
             response = site.action.package_patch(
-                package_id=record['slug'],
+                id=record['slug'],
                 extras=[{
                     'key': 'spatial',
                     'value': json_file
