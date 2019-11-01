@@ -152,7 +152,7 @@ def attach_file(package_title, site, file):
         package_id=package_title,
         upload=open('export/files/' + file["file_name"], 'rb'),
         name=file["description"],
-        size=file["size"]
+        size=file["file_size"]
     )
 
     # Create the default view
