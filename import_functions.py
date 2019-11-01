@@ -131,7 +131,7 @@ def create_dataset(site, record, org, archive):
                 id=record['slug'],
                 extras=[{
                     'key': 'spatial',
-                    'value': gjson["features"][0]["geometry"]
+                    'value': json.dumps(gjson["features"][0]["geometry"])
                 }]
             )
         else:
