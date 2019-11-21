@@ -120,7 +120,7 @@ def create_dataset(site, record, org, archive):
             continue
         if attachment["file_name"] == "imported_locations":
             json_file = ""
-            with open('export/files/' + attachment["file_name"]) as file:
+            with open('export/files/' + record['slug'] + "/" + attachment["file_name"]) as file:
                 json_file = file.read()
             # g1 = geojson.loads(json_file)
             # g2 = shapely.geometry.shape(g1)
@@ -150,7 +150,7 @@ def attach_url(package_title, site, link, archive):
 def attach_file(package_title, site, file):
     response = site.action.resource_create(
         package_id=package_title,
-        upload=open('export/files/' + file["file_name"], 'rb'),
+        upload=open('export/files/' + package_title + "/" + file["file_name"], 'rb'),
         name=file["description"],
         size=file["file_size"]
     )
