@@ -152,10 +152,6 @@ def create_dataset(site, record, org, archive):
             )
         else:
             attach_file(record['slug'], site, attachment)
-            response = site.call_action('resource_create', attachment, files=files)
-
-            # Create the default view
-            site.action.resource_create_default_resource_views(resource=response)
 
 # Attach a URL as a resource to an existing Dataset.
 def attach_url(package_title, site, link, archive):
