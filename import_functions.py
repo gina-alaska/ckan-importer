@@ -78,6 +78,9 @@ def create_dataset(site, record, org, archive):
     newslug = re.sub('[^a-zA-Z0-9 \-_\n\.]', '', slug)
     newslug = newslug.replace(".", "")
     record['slug'] = newslug[:100]
+    maintainer = "None"
+    maintainer_email = ""
+    phone = {}
     print("**** importing " + newslug)
 
     # Make sure that the status is set to something
@@ -89,6 +92,20 @@ def create_dataset(site, record, org, archive):
         bounds_value = record['bounds'][0]['geom']
     else:
         bounds_value  = ""
+
+    if 'primary_contact' in record and record['primary_contact'] != None:
+        if 'name' in record['primary_contact']:
+            maintainer = record['primary_contact']['name']
+
+        if 'email' in record['primary_contact']:
+            maintainer_email = record['primary_contact']['email']
+
+        if 'phone' in record['primary_contact']:
+            phone.append({
+                'key': 'primary_contact_phone',
+                'value': record['primary_contact']['phone']
+            })
+    
 
     # Create the dataset
     print("###### importing metadata")
@@ -103,8 +120,10 @@ def create_dataset(site, record, org, archive):
         archived_at=archive,
         # archived_at=str(datetime.datetime.now().isoformat()), # Custom field with validator.
         iso_topic_category='001',                 # Custom field with validator.
-        owner_org=org
-    )
+        owner_org=org,
+        maintainer = maintainer,
+        maintainer_email = maintainer_email,
+        extras = phone
 
     # Process record links
     print("###### importing links")
@@ -136,6 +155,10 @@ def create_dataset(site, record, org, archive):
             )
         else:
             attach_file(record['slug'], site, attachment)
+            response = site.call_action('resource_create', attachment, files=files)
+
+            # Create the default view
+            site.action.resource_create_default_resource_views(resource=response)
 
 # Attach a URL as a resource to an existing Dataset.
 def attach_url(package_title, site, link, archive):
