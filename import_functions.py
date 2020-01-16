@@ -80,7 +80,7 @@ def create_dataset(site, record, org, archive):
     record['slug'] = newslug[:100]
     maintainer = "None"
     maintainer_email = ""
-    phone = {}
+    phone = ""
     print("**** importing " + newslug)
 
     # Make sure that the status is set to something
@@ -101,11 +101,7 @@ def create_dataset(site, record, org, archive):
             maintainer_email = record['primary_contact']['email']
 
         if 'phone' in record['primary_contact']:
-            phone.append({
-                'key': 'primary_contact_phone',
-                'value': record['primary_contact']['phone']
-            })
-    
+            phone = record['primary_contact']['phone']
 
     # Create the dataset
     print("###### importing metadata")
@@ -123,7 +119,8 @@ def create_dataset(site, record, org, archive):
         owner_org=org,
         maintainer = maintainer,
         maintainer_email = maintainer_email,
-        extras = phone
+        extras = { 'key' = "Maintainer Phone Num", 'value' = phone }
+        )
 
     # Process record links
     print("###### importing links")
