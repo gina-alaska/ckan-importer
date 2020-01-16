@@ -119,7 +119,7 @@ def create_dataset(site, record, org, archive):
         owner_org=org,
         maintainer = maintainer,
         maintainer_email = maintainer_email,
-        extras = { 'key' = "Maintainer Phone Num", 'value' = phone }
+        extras = { 'key': "Maintainer Phone Num", 'value': phone }
         )
 
     # Process record links
