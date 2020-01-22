@@ -4,6 +4,7 @@ import re
 import json
 import geojson
 import shapely.wkt, shapely.geometry
+import fnmatch
 
 # ckanext-spatial does not support GeometryCollections.
 # This function converts GeometryCollections into their corresponding
@@ -134,7 +135,7 @@ def create_dataset(site, record, org, archive):
     for attachment in record["attachments"]:
         if attachment == {}:
             continue
-        if attachment["file_name"] == "imported_locations":
+        if fnmatch.fnmatch(attachment["file_name"], "*_locations"):
             json_file = ""
             with open('export/files/' + record['slug'] + "/" + attachment["file_name"]) as file:
                 json_file = file.read()
