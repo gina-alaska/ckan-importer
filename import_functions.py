@@ -165,15 +165,25 @@ def attach_url(package_title, site, link, archive):
 
 # Upload a file resource to DataStore and attach it to an existing Dataset.
 def attach_file(package_title, site, file):
-    response = site.action.resource_create(
-        package_id=package_title,
-        upload=open('export/files/' + package_title + "/" + file["file_name"], 'rb'),
-        name=file["description"],
-        size=file["file_size"]
-    )
+    attachment = {
+    'package_id': package_title,
+    'size': file['file_size']
+    }
+
+    if file['description'] == '' or file['description'] == None:
+        attachment['name'] = file['file_name']
+    else:
+        attachment['name'] = file['description']
+
+    files = {
+        'upload': open('export/files/' + package_title + '/' +file['file_name'], 'rb')
+    }
+
+    response = site.call_action('resource_create', attachment, files=files)
 
     # Create the default view
     site.action.resource_create_default_resource_views(resource=response)
+
 
 # This function deletes all of the datasets, organizations, and groups in the database so that the
 # import can be ran without any conflicts with existing datasets.
