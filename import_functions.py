@@ -135,7 +135,7 @@ def create_dataset(site, record, org, archive):
     for attachment in record["attachments"]:
         if attachment == {}:
             continue
-        if fnmatch.fnmatch(attachment["file_name"], "*_locations"):
+        if fnmatch.fnmatch(attachment["file_name"], "*locations"):
             json_file = ""
             with open('export/files/' + record['slug'] + "/" + attachment["file_name"]) as file:
                 json_file = file.read()
