@@ -114,6 +114,7 @@ def create_dataset(site, record, org, archive, collections):
         if 'phone' in record['primary_contact']:
             phone = record['primary_contact']['phone']
 
+    groups = []
     if len(collections) > 0:
         groups = map(lambda x: {'name': x}, collections)
 
