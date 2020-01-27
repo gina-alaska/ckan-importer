@@ -68,6 +68,16 @@ def create_organization(site, orgname):
     )
     return response
 
+# Create group from collection
+def create_collection(site, col_slug, col_title, col_desc):
+    # Create a new Group (aka Collection).
+    response = site.action.group_create(
+        name=col_slug,
+        title=col_title,
+        description=col_desc
+    )
+    return response
+
 # Create a new Dataset.
 def create_dataset(site, record, org, archive):
 

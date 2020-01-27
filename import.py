@@ -65,11 +65,37 @@ archive=str(datetime.datetime.now().isoformat())
 
 # Parse JSON data and create datasets in CKAN
 for record in glynxdata:
+    collections = []
+
     if args.report and len(record["title"]) > 100:
         report_file.write("Record tile is too long:\n")
         report_file.write(record["title"].encode('utf-8') + "\n")
         report_file.write("\n")
         continue
+
+    # parse records for collections and create groups for them.
+    if 'collections' in record:
+        for col in record['collections']:
+            col_slug = re.sub("\W+", "-", col['name']).lower()
+            col_title = col['name']
+            col_desc = col['description']
+            collections.append(col_slug)
+
+            # The EPSCoR GLynx export has both an organization and collection
+            # (aka group) with the name "Southeast Alaska GIS Library". CKAN
+            # appears not to allow them to use the same slug, so make the group
+            # slug a little different.
+            if col['name'] == "Southeast Alaska GIS Library":
+                col_slug = col_slug + '_group'
+
+            # We are attempting to create an collections for every package,
+            # but this creates problems since the same collections will
+            # usually show up more than once. This is a temporary hack to
+            # prevent the script from bombing when this happens.
+            try:
+                imp.create_collection(site, col_slug, col_title, col_desc)
+            except:
+                pass
 
     imp.create_dataset(site, record, args.org, archive)
 
