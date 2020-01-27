@@ -79,7 +79,7 @@ def create_collection(site, col_slug, col_title, col_desc):
     return response
 
 # Create a new Dataset.
-def create_dataset(site, record, org, archive):
+def create_dataset(site, record, org, archive, collections):
 
     # Make sure that the slug will pass CKAN validation
     slug = record['slug']
@@ -114,6 +114,9 @@ def create_dataset(site, record, org, archive):
         if 'phone' in record['primary_contact']:
             phone = record['primary_contact']['phone']
 
+    if len(collections) > 0:
+        groups = map(lambda x: {'name': x}, collections)
+
     # Create the dataset
     print("###### importing metadata")
     response = site.action.package_create(
@@ -128,6 +131,7 @@ def create_dataset(site, record, org, archive):
         # archived_at=str(datetime.datetime.now().isoformat()), # Custom field with validator.
         iso_topic_category='001',                 # Custom field with validator.
         owner_org=org,
+        groups=groups,
         maintainer = maintainer,
         maintainer_email = maintainer_email,
         extras = [{ 'key': "Maintainer Phone Num", 'value': phone }]

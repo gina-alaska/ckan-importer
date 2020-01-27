@@ -98,7 +98,7 @@ for record in glynxdata:
             except:
                 pass
 
-    imp.create_dataset(site, record, args.org, archive)
+    imp.create_dataset(site, record, args.org, archive, collections)
 
 # Close report file
 if args.report:
